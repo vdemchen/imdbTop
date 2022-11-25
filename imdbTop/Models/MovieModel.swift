@@ -2,7 +2,7 @@
 //  MovieModel.swift
 //  imdbTop
 //
-//  Created by Vlada Kemskaya on 24.11.2022.
+//  Created by Vladyslav Demchenko on 24.11.2022.
 //
 
 import Foundation

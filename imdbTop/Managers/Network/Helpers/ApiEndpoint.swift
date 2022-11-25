@@ -2,7 +2,7 @@
 //  ApiEndpoint.swift
 //  imdbTop
 //
-//  Created by Vlada Kemskaya on 25.11.2022.
+//  Created by Vladyslav Demchenko on 25.11.2022.
 //
 
 import Foundation

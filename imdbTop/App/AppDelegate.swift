@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  imdbTop
 //
-//  Created by Vlad Demchenko on 24.11.2022.
+//  Created by Vladyslav Demchenko on 24.11.2022.
 //
 
 import UIKit
