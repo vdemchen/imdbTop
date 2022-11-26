@@ -18,11 +18,13 @@ final class ItemTableViewCell: UITableViewCell {
     // MARK: - Properties
     private var cancellables = Set<AnyCancellable>()
     
+    // MARK: - Overrides
     override func prepareForReuse() {
         super.prepareForReuse()
         cancellables = []
     }
     
+    // MARK: - Setup
     func setup(movie: MovieModel) {
         titleLabel.text = movie.title
         ratingLabel.text = movie.imDBRating

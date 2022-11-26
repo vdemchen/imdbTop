@@ -9,7 +9,10 @@ import Combine
 import Foundation
 
 final class ListManager {
+    // MARK: - Properties
     private let networkManager = NetworkManager()
+    
+    // MARK: - Methods
     func getTop250(_ fetchItems: Int) -> AnyPublisher<Movies, Error> {
         let quaryItems = [
             "groups": "top_250",

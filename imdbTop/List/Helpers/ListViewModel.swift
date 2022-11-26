@@ -9,9 +9,11 @@ import Combine
 import Foundation
 
 final class ListViewModel {
+    // MARK: - Constants
     private enum Constants {
         static let fetchStep = 10
     }
+    
     // MARK: - Properties
     @Published var filteredMovies = Movies()
     @Published var movies = Movies()
@@ -19,15 +21,15 @@ final class ListViewModel {
     @Published var isLoading = false
     
     private let manager = ListManager()
-
     private var fetchItems = Constants.fetchStep
-    
     private var cancellables = Set<AnyCancellable>()
     
+    // MARK: - Init
     init() {
         self.bindData()
     }
     
+    // MARK: - Public methods
     func loadData() {
         manager.getTop250(fetchItems)
             .handleEvents(receiveSubscription: { [weak self] _ in
@@ -51,6 +53,7 @@ final class ListViewModel {
         loadData()
     }
     
+    // MARK: - Private methods
     private func bindData() {
         let filterPublisher = $searchString
             .combineLatest($movies) { text, movies in

@@ -8,17 +8,21 @@
 import Combine
 import UIKit
 
-typealias DataSource = UITableViewDiffableDataSource<Int, MovieModel>
-typealias Snapshot = NSDiffableDataSourceSnapshot<Int, MovieModel>
+// MARK: - Datasource & Snapshot
+private typealias DataSource = UITableViewDiffableDataSource<Int, MovieModel>
+private typealias Snapshot = NSDiffableDataSourceSnapshot<Int, MovieModel>
 
 class ListViewController: UIViewController {
+    // MARK: - Contants
     private enum Constants {
         static let tablePrefetchOffset = 5
     }
     
+    // MARK: - Outlets
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet private var tableView: UITableView!
     
+    // MARK: - Properties
     private let refreshControl = UIRefreshControl()
     private lazy var dataSource = createDataSource()
     private lazy var searchBar = UISearchBar(frame: .zero)
@@ -26,6 +30,7 @@ class ListViewController: UIViewController {
     private let viewModel: ListViewModel
     private var cancellables = Set<AnyCancellable>()
     
+    // MARK: - Init
     init(viewModel: ListViewModel? = nil) {
         self.viewModel = viewModel ?? ListViewModel()
         super.init(nibName: nil, bundle: nil)
@@ -36,6 +41,7 @@ class ListViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -43,6 +49,7 @@ class ListViewController: UIViewController {
         viewModel.loadData()
     }
 
+    // MARK: - Private methods
     private func setupUI() {
         title = "Top 250"
         navigationItem.titleView = searchBar
@@ -100,6 +107,7 @@ class ListViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDelegate
 extension ListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let movie = viewModel.filteredMovies[indexPath.row]
@@ -109,12 +117,14 @@ extension ListViewController: UITableViewDelegate {
     }
 }
 
+// MARK: - UITableViewDataSourcePrefetching
 extension ListViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         loadMoreIfNeeded(indexPaths: indexPaths)
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension ListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         viewModel.searchString = searchText
