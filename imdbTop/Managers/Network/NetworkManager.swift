@@ -9,9 +9,6 @@ import Combine
 import Foundation
 
 final class NetworkManager {
-    private enum Constants {
-        static let retryCount = 2
-    }
     private static let session = URLSession.shared
     
     private static var jsonDecoder: JSONDecoder = {
